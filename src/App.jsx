@@ -63,13 +63,15 @@ const App = ({ nodeCount }) => {
       return positions;
     };
 
+    const nodeLabels = ["Parsa", "Mahin", "Shajan", "Steph", "Antonio"];
+
     const newNodes = Array.from({ length: nodeCount }, (_, i) => {
       const positions = calculatePositions(nodeCount);
       return {
         id: (i + 1).toString(),
         type: "custom",
         position: positions[i],
-        data: { label: `Node ${i + 1}` },
+        data: { label: nodeLabels[i % nodeLabels.length] },
       };
     });
 
