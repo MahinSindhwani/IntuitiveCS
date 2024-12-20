@@ -1,26 +1,52 @@
-import { Handle, Position, useConnection } from "@xyflow/react";
+import React, { useState } from "react";
+import { Handle, Position } from "@xyflow/react";
 
-export default function CustomNode({ id, data }) {
-  const connection = useConnection();
-  const isTarget = connection.inProgress && connection.fromNode.id !== id;
-  const instruction = isTarget ? "Drop here" : "Drag to connect";
+export default function CustomNode({ id, data, setNodes }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [label, setLabel] = useState(data.label);
+
+  const handleDoubleClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleInputChange = (e) => {
+    setLabel(e.target.value);
+  };
+
+  const handleBlur = () => {
+    setNodes((nds) =>
+      nds.map((node) =>
+        node.id === id ? { ...node, data: { ...node.data, label } } : node
+      )
+    );
+    setIsEditing(false);
+  };
 
   return (
     <div className="customNode">
-      <div className="customNodeBody">
-        {!connection.inProgress && (
-          <Handle className="customHandle source" position={Position.Right} type="source" />
-        )}
-        {(!connection.inProgress || isTarget) && (
-          <Handle
-            className="customHandle target"
-            position={Position.Left}
-            type="target"
-            isConnectableStart={false}
+      <div className="customNodeBody" onDoubleClick={handleDoubleClick}>
+        <Handle
+          className="customHandle source"
+          position={Position.Right}
+          type="source"
+        />
+        <Handle
+          className="customHandle target"
+          position={Position.Left}
+          type="target"
+          isConnectableStart
+        />
+        {isEditing ? (
+          <input
+            type="text"
+            value={label}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            autoFocus
           />
+        ) : (
+          <div>{label}</div>
         )}
-        <div>{data?.label}</div>
-        <div>{instruction}</div>
       </div>
     </div>
   );
