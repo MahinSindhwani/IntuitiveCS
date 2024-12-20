@@ -70,8 +70,8 @@ const App = ({ nodeCount }) => {
       const connectionList = edges.map((edge) => {
         const sourceNode = nodes.find((n) => n.id === edge.source);
         const targetNode = nodes.find((n) => n.id === edge.target);
-        const sourceLabel = sourceNode?.id || edge.source;
-        const targetLabel = targetNode?.id || edge.target;
+        const sourceLabel = sourceNode?.data.label || edge.source;
+        const targetLabel = targetNode?.data.label || edge.target;
         return `(${sourceLabel},${targetLabel})`;
       });
       setConnections(`{${connectionList.join(", ")}}`);
