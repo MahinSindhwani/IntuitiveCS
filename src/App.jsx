@@ -57,7 +57,7 @@ const App = ({ nodeCount }) => {
   const onConnect = useCallback(
     (params) => {
       const edgeType =
-        params.source === params.target ? "selfConnecting" : "floating";
+        params.source === params.target ? "selfLoop" : "floating";
       setEdges((eds) => addEdge({ ...params, type: edgeType }, eds));
     },
     [setEdges]

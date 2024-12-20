@@ -15,5 +15,11 @@ export default function SelfConnectingEdge(props) {
     A ${radiusX} ${radiusY} 0 1 0 ${targetX + 2} ${targetY}
   `;
 
-  return <BaseEdge path={edgePath} markerEnd={markerEnd} />;
+  return (
+    <BaseEdge
+      path={edgePath}
+      markerEnd={markerEnd}
+      style={{ stroke: "black", strokeWidth: 3 }}
+    />
+  );
 }
