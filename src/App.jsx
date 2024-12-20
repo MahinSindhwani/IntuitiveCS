@@ -44,12 +44,35 @@ const App = ({ nodeCount }) => {
   };
 
   useEffect(() => {
-    const newNodes = Array.from({ length: nodeCount }, (_, i) => ({
-      id: (i + 1).toString(),
-      type: "custom",
-      position: { x: i * 100, y: i * 50 },
-      data: { label: `Node ${i + 1}` },
-    }));
+    const calculatePositions = (count) => {
+      const centerX = 400; // X-coordinate of the center
+      const centerY = 300; // Y-coordinate of the center
+      const radius = 200; // Distance from the center
+
+      if (count === 1) {
+        return [{ x: centerX, y: centerY }];
+      }
+
+      const positions = [];
+      for (let i = 0; i < count; i++) {
+        const angle = (2 * Math.PI * i) / count; // Divide the circle equally
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        positions.push({ x, y });
+      }
+      return positions;
+    };
+
+    const newNodes = Array.from({ length: nodeCount }, (_, i) => {
+      const positions = calculatePositions(nodeCount);
+      return {
+        id: (i + 1).toString(),
+        type: "custom",
+        position: positions[i],
+        data: { label: `Node ${i + 1}` },
+      };
+    });
+
     setNodes(newNodes);
     setEdges([]);
   }, [nodeCount, setNodes, setEdges]);
