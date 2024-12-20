@@ -18,8 +18,26 @@ import SelfConnectingEdge from "./SelfConnectingEdge";
 const connectionLineStyle = {
   stroke: "black",
   strokeWidth: 3,
+<<<<<<< HEAD
 };
 
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+};
+
+<<<<<<< HEAD
+=======
+const nodeTypes = {
+  custom: CustomNode,
+>>>>>>> ce9b0911be1255bcf75d40ba15de6995039732e3
+>>>>>>> 3d6dec2db1c12a32819b5d932627913817236337
+};
+
+>>>>>>> 6d17b5c4d1a348682ec6ac05caadd5ada16bfc80
+>>>>>>> 7a5e76fee138c4a6e9c976ca78a1900ba486330b
 const edgeTypes = {
   floating: FloatingEdge,
   selfLoop: SelfConnectingEdge,
