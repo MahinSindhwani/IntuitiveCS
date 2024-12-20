@@ -15,7 +15,8 @@ import FloatingEdge from "./FloatingEdge";
 import CustomConnectionLine from "./CustomConnectionLine";
 
 const connectionLineStyle = {
-  stroke: "#b1b1b7",
+  stroke: "black",
+  strokeWidth: 3,
 };
 
 const nodeTypes = {
@@ -30,7 +31,7 @@ const defaultEdgeOptions = {
   type: "floating",
   markerEnd: {
     type: MarkerType.ArrowClosed,
-    color: "#b1b1b7",
+    color: "black",
   },
 };
 
