@@ -4,7 +4,7 @@
     /* Custom Variables */
     --xy-theme-selected: #F57DBD;
     --xy-theme-hover: #C5C5C5;
-    --xy-theme-edge-hover: black;
+    --xy-theme-edge-hover: grey;
     --xy-theme-color-focus: #E8E8E8;
  
     /* Built-in Variables see https://reactflow.dev/learn/customization/theming */

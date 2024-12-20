@@ -13,24 +13,23 @@ import "@xyflow/react/dist/style.css";
 import CustomNode from "./CustomNode";
 import FloatingEdge from "./FloatingEdge";
 import CustomConnectionLine from "./CustomConnectionLine";
+import SelfConnectingEdge from "./SelfConnectingEdge";
 
 const connectionLineStyle = {
-  stroke: "#b1b1b7",
-};
-
-const nodeTypes = {
-  custom: CustomNode,
+  stroke: "black",
+  strokeWidth: 3,
 };
 
 const edgeTypes = {
   floating: FloatingEdge,
+  selfLoop: SelfConnectingEdge,
 };
 
 const defaultEdgeOptions = {
   type: "floating",
   markerEnd: {
     type: MarkerType.ArrowClosed,
-    color: "#b1b1b7",
+    color: "black",
   },
 };
 
@@ -38,6 +37,11 @@ const App = ({ nodeCount }) => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [connections, setConnections] = useState("0 connections");
+
+  // Define nodeTypes within the scope of App to access setNodes
+  const nodeTypes = {
+    custom: (props) => <CustomNode {...props} setNodes={setNodes} />,
+  };
 
   useEffect(() => {
     const newNodes = Array.from({ length: nodeCount }, (_, i) => ({
@@ -51,22 +55,26 @@ const App = ({ nodeCount }) => {
   }, [nodeCount, setNodes, setEdges]);
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params) => {
+      const edgeType =
+        params.source === params.target ? "selfConnecting" : "floating";
+      setEdges((eds) => addEdge({ ...params, type: edgeType }, eds));
+    },
     [setEdges]
   );
 
   useEffect(() => {
     if (edges.length === 0) {
-      setConnections("0 connections");
+      setConnections("{}");
     } else {
       const connectionList = edges.map((edge) => {
         const sourceNode = nodes.find((n) => n.id === edge.source);
         const targetNode = nodes.find((n) => n.id === edge.target);
-        const sourceLabel = sourceNode?.data?.label || edge.source;
-        const targetLabel = targetNode?.data?.label || edge.target;
-        return `${sourceLabel} -> ${targetLabel}`;
+        const sourceLabel = sourceNode?.id || edge.source;
+        const targetLabel = targetNode?.id || edge.target;
+        return `(${sourceLabel},${targetLabel})`;
       });
-      setConnections(connectionList.join(", "));
+      setConnections(`{${connectionList.join(", ")}}`);
     }
   }, [edges, nodes]);
 
