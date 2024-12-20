@@ -1,23 +1,19 @@
 import React from "react";
-import { useState } from "react";
 
-function Counter() {
-  const [count, setCount] = useState(1);
+function Counter({ value, onChange }) {
   const increment = () => {
-    setCount((prevCount) => (prevCount < 10 ? prevCount + 1 : prevCount));
+    onChange((prevCount) => (prevCount < 10 ? prevCount + 1 : prevCount));
   };
 
   const decrement = () => {
-    setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : prevCount));
+    onChange((prevCount) => (prevCount > 1 ? prevCount - 1 : prevCount));
   };
 
   return (
     <div className="counter">
-      <span>
-        <input value={count} id="count" />
-        <button onClick={decrement}>-</button>
-        <button onClick={increment}>+</button>
-      </span>
+      <input value={value} id="count" readOnly />
+      <button onClick={decrement}>-</button>
+      <button onClick={increment}>+</button>
     </div>
   );
 }
