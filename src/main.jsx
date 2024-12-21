@@ -1,14 +1,21 @@
-import { StrictMode, useState } from "react";
+// src/main.jsx
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import Counter from "./counter.jsx";
+import HamburgerMenu from "./HamburgerMenu.jsx"; // Import the HamburgerMenu component
 
 function Main() {
   const [nodeCount, setNodeCount] = useState(3);
   const [relations, setRelations] = useState({});
+
   return (
     <div id="layout">
+      {/* Hamburger Menu */}
+      <HamburgerMenu />
+
+      {/* Sidebar */}
       <div id="sidebar">
         <Counter value={nodeCount} onChange={setNodeCount} />
         <div id="node-info">
@@ -23,6 +30,8 @@ function Main() {
           </div>
         </div>
       </div>
+
+      {/* Main Area */}
       <div id="main-area">
         <App nodeCount={nodeCount} setRelations={setRelations} />
       </div>
@@ -31,7 +40,7 @@ function Main() {
 }
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <React.StrictMode>
     <Main />
-  </StrictMode>
+  </React.StrictMode>
 );
