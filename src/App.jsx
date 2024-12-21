@@ -15,6 +15,14 @@ import FloatingEdge from "./FloatingEdge";
 import CustomConnectionLine from "./CustomConnectionLine";
 import SelfConnectingEdge from "./SelfConnectingEdge";
 
+import {
+  isReflexive,
+  isAntiReflexive,
+  isSymmetric,
+  isAntiSymmetric,
+  isTransitive,
+} from "./RelationsLogic";
+
 const connectionLineStyle = {
   stroke: "black",
   strokeWidth: 3,
@@ -33,10 +41,10 @@ const defaultEdgeOptions = {
   },
 };
 
-const App = ({ nodeCount }) => {
+const App = ({ nodeCount, setRelations }) => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [connections, setConnections] = useState("0 connections");
+  const [connections, setConnections] = useState("{}");
 
   // Define nodeTypes within the scope of App to access setNodes
   const nodeTypes = {
@@ -102,6 +110,18 @@ const App = ({ nodeCount }) => {
       setConnections(`{${connectionList.join(", ")}}`);
     }
   }, [edges, nodes]);
+
+  useEffect(() => {
+    const nodeLabels = nodes.map((node) => node.data.label);
+    const relations = {
+      reflexive: isReflexive(nodeLabels, connections),
+      antiReflexive: isAntiReflexive(connections),
+      symmetric: isSymmetric(connections),
+      antiSymmetric: isAntiSymmetric(connections),
+      transitive: isTransitive(connections),
+    };
+    setRelations(relations);
+  }, [connections, nodes, setRelations]);
 
   return (
     <div id="app-container">

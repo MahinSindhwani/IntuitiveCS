@@ -6,21 +6,25 @@ import Counter from "./counter.jsx";
 
 function Main() {
   const [nodeCount, setNodeCount] = useState(3);
-
+  const [relations, setRelations] = useState({});
   return (
     <div id="layout">
       <div id="sidebar">
         <Counter value={nodeCount} onChange={setNodeCount} />
         <div id="node-info">
           <h2>Node Information</h2>
-          <p>
-            Connections will be displayed in the diagram area on the right or
-            integrated as needed.
-          </p>
+          <div>
+            <h3>Relation Properties:</h3>
+            <p>Reflexive: {relations.reflexive ? "Yes" : "No"}</p>
+            <p>Anti-Reflexive: {relations.antiReflexive ? "Yes" : "No"}</p>
+            <p>Symmetric: {relations.symmetric ? "Yes" : "No"}</p>
+            <p>Anti-Symmetric: {relations.antiSymmetric ? "Yes" : "No"}</p>
+            <p>Transitive: {relations.transitive ? "Yes" : "No"}</p>
+          </div>
         </div>
       </div>
       <div id="main-area">
-        <App nodeCount={nodeCount} />
+        <App nodeCount={nodeCount} setRelations={setRelations} />
       </div>
     </div>
   );
