@@ -1,3 +1,5 @@
+/* src/index.css */
+
 @import url('./xy-theme.css');
 
 html,
@@ -9,24 +11,28 @@ body {
   width: 100%;
 }
 
-#root, #app {
+#root,
+#app {
   width: 100%;
   height: 100%;
 }
 
-/* Layout and sidebar styling remains the same */
+/* Layout and sidebar styling */
 #layout {
   display: flex;
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
+  position: relative; /* Ensures that fixed elements like the hamburger menu are positioned relative to the layout */
 }
 
+/* Sidebar adjustments to prevent overlap with the hamburger menu */
 #sidebar {
   width: 300px;
   background: #eee;
   padding: 20px;
   box-sizing: border-box;
+  padding-top: 60px; /* Adds space for the hamburger menu */
 }
 
 #node-info {
@@ -39,8 +45,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px; /* Optional: Adds padding to the main area */
 }
 
+/* App Container */
 #app-container {
   display: flex;
   flex-direction: column;
@@ -63,6 +71,7 @@ body {
   text-align: center;
 }
 
+/* Counter Styling */
 .counter {
   display: flex;
   align-items: center;
@@ -75,7 +84,7 @@ body {
   font-size: 1.2rem;
 }
 
-/* Remove backgrounds/borders from outer node containers */
+/* Custom Node Styling */
 .customNode {
   background: transparent;
   border: none;
@@ -83,23 +92,20 @@ body {
   padding: 0;
 }
 
-/* Override React Flow default node styling */
 .react-flow__node {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
 
-/* Remove selection highlight */
 .react-flow__node.selected {
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
 }
 
-/* Keep the node body circular */
 .customNodeBody {
-  width: 80px; 
+  width: 80px;
   height: 80px;
   border-radius: 50%;
   background-color: white;
@@ -115,7 +121,6 @@ body {
   position: relative;
 }
 
-/* Handles remain the same */
 .customHandle {
   width: 16px;
   height: 16px;
@@ -147,4 +152,105 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
+}
+
+/* Hamburger Menu Styles */
+.hamburger-icon {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1001; /* Ensures it's above other elements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-icon img,
+.hamburger-icon svg {
+  width: 100%;
+  height: 100%;
+  color: #333; /* Adjust color if using SVG icons like react-icons */
+}
+
+/* Overlay for the Sliding Menu */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s;
+  z-index: 1000;
+}
+
+.menu-overlay.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Sliding Menu */
+.sliding-menu {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Hidden by default */
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease;
+  z-index: 1001;
+  padding-top: 60px; /* Space for the hamburger icon */
+}
+
+.sliding-menu.open {
+  right: 0;
+}
+
+.sliding-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sliding-menu li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.sliding-menu li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  display: block;
+}
+
+.sliding-menu li a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Ensure that the main content is below the hamburger menu */
+#main-area {
+  margin-left: 0; /* Reset if previously adjusted */
+}
+
+/* Responsive Adjustments (Optional) */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 250px;
+    padding: 15px;
+  }
+
+  .sliding-menu {
+    width: 200px;
+  }
+
+  .sliding-menu li a {
+    font-size: 16px;
+  }
 }
