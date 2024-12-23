@@ -110,13 +110,14 @@ body {
   border-radius: 50%;
   background-color: white;
   display: flex;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   font-size: 1rem;
   color: #333;
-  border: 2px solid #007BFF;
+  border: 2px solid #173264;
   text-align: center;
   position: relative;
 }
@@ -134,14 +135,22 @@ body {
 }
 
 .customHandle.source {
+  width: 15px;
+  height: 15px;
+  background-color: #ffffff;
+  border: 2px solid #044d88;
   top: 50%;
-  right: -8px;
+  right: -12px;
   transform: translateY(-50%);
 }
 
 .customHandle.target {
+  width: 15px;
+  height: 15px;
+  background-color: #ffffff;
+  border: 2px solid #d1830e;
   top: 50%;
-  left: -8px;
+  left: -12px;
   transform: translateY(-50%);
 }
 
@@ -152,6 +161,10 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
+}
+
+.react-flow__edge-path:hover {
+  stroke: white; /* Highlight teal on hover */
 }
 
 /* Hamburger Menu Styles */
@@ -253,4 +266,27 @@ body {
   .sliding-menu li a {
     font-size: 16px;
   }
+}
+
+
+.button-edge__label {
+  position: absolute;
+  pointer-events: all;
+  transform-origin: center;
+}
+
+.button-edge__button {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #f7f9fb;
+  color: #333;
+  background-color: #f3f3f4;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.button-edge__button:hover {
+  background-color: #64b5f6; /* Highlight color on hover */
+  color: #ffffff;
 }

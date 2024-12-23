@@ -24,7 +24,7 @@ import {
 } from "./RelationsLogic";
 
 const connectionLineStyle = {
-  stroke: "black",
+  stroke: "#293a42",
   strokeWidth: 3,
 };
 
@@ -37,7 +37,7 @@ const defaultEdgeOptions = {
   type: "floating",
   markerEnd: {
     type: MarkerType.ArrowClosed,
-    color: "black",
+    color: "#293a42",
   },
 };
 

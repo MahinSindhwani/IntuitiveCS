@@ -106,3 +106,12 @@
     width: 5px;
     height: 5px;
 }
+
+.react-flow__edge.selectable:hover .react-flow__edge-path{
+    stroke: #64B5F6 !important;
+}
+
+.react-flow__edge.selectable.selected .react-flow__edge-path{
+    stroke: #64B5F6 !important;
+}
+
