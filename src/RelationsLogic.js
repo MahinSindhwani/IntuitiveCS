@@ -52,3 +52,43 @@ export const isTransitive = (connections) => {
     )
   );
 };
+
+export const isEquivalenceRelation = (nodes,connections) => {
+  return(
+    isReflexive(nodes,connections) && isSymmetric(connections) && isTransitive(connections)
+  );
+};
+
+export const isPartialOrder = (nodes,connections) => {
+  return(
+    isReflexive(nodes,connections) && isAntiSymmetric(connections) && isTransitive(connections)
+  );
+};
+
+// Function to check if a relation is total (totality condition)
+export const isTotal = (nodes, connections) => {
+  const relation = parseConnections(connections);
+
+  // Check if for every pair of nodes (a, b), either (a, b) or (b, a) exists
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = 0; j < nodes.length; j++) {
+      if (i !== j) {
+        const a = nodes[i];
+        const b = nodes[j];
+        const hasAB = relation.some(([x, y]) => x === a && y === b);
+        const hasBA = relation.some(([x, y]) => x === b && y === a);
+
+        if (!hasAB && !hasBA) {
+          return false; // Totality condition is violated
+        }
+      }
+    }
+  }
+
+  return true; // Totality condition satisfied
+};
+
+// Function to check if a relation is a total order
+export const isTotalOrder = (nodes, connections) => {
+  return isPartialOrder(nodes, connections) && isTotal(nodes, connections);
+};

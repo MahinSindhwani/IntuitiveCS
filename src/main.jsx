@@ -19,14 +19,17 @@ function Main() {
       <div id="sidebar">
         <Counter value={nodeCount} onChange={setNodeCount} />
         <div id="node-info">
-          <h2>Node Information</h2>
           <div>
-            <h3>Relation Properties:</h3>
+            <h3>Properties:</h3>
             <p>Reflexive: {relations.reflexive ? "Yes" : "No"}</p>
             <p>Anti-Reflexive: {relations.antiReflexive ? "Yes" : "No"}</p>
             <p>Symmetric: {relations.symmetric ? "Yes" : "No"}</p>
             <p>Anti-Symmetric: {relations.antiSymmetric ? "Yes" : "No"}</p>
             <p>Transitive: {relations.transitive ? "Yes" : "No"}</p>
+            <h3>Realtion:</h3>
+            <p>Equivalence Relation: {relations.equivalent ? "Yes" : "No"}</p>
+            <p>Partial order Relation: {relations.partial ? "Yes" : "No"}</p>
+            <p>Total order Relation: {relations.total ? "Yes" : "No"}</p>
           </div>
         </div>
       </div>

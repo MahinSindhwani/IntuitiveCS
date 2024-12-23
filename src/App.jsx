@@ -21,6 +21,10 @@ import {
   isSymmetric,
   isAntiSymmetric,
   isTransitive,
+  isEquivalenceRelation,
+  isPartialOrder,
+  isTotal,
+  isTotalOrder,
 } from "./RelationsLogic";
 
 const connectionLineStyle = {
@@ -119,6 +123,10 @@ const App = ({ nodeCount, setRelations }) => {
       symmetric: isSymmetric(connections),
       antiSymmetric: isAntiSymmetric(connections),
       transitive: isTransitive(connections),
+      equivalent: isEquivalenceRelation(nodeLabels, connections),
+      partial: isPartialOrder(nodeLabels, connections),
+      totality: isTotal(nodeLabels, connections),
+      total: isTotalOrder(nodeLabels, connections),
     };
     setRelations(relations);
   }, [connections, nodes, setRelations]);
