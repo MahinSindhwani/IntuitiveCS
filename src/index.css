@@ -290,3 +290,28 @@ body {
   background-color: #64b5f6; /* Highlight color on hover */
   color: #ffffff;
 }
+
+
+/* Example styles for Home.jsx */
+#home-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#home-links a {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #007bff;
+  text-decoration: none;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  width: 200px;
+  text-align: center;
+}
+
+#home-links a:hover {
+  background-color: #007bff;
+  color: white;
+}
