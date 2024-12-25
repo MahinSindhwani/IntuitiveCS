@@ -15,6 +15,7 @@ import FloatingEdge from "./FloatingEdge";
 import CustomConnectionLine from "./CustomConnectionLine";
 import SelfConnectingEdge from "./SelfConnectingEdge";
 
+import Counter from "./counter"; // Import Counter component
 import {
   isReflexive,
   isAntiReflexive,
@@ -45,7 +46,9 @@ const defaultEdgeOptions = {
   },
 };
 
-const App = ({ nodeCount, setRelations }) => {
+const App = () => {
+  const [nodeCount, setNodeCount] = useState(3);
+  const [relations, setRelations] = useState({});
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [connections, setConnections] = useState("{}");
@@ -57,9 +60,9 @@ const App = ({ nodeCount, setRelations }) => {
 
   useEffect(() => {
     const calculatePositions = (count) => {
-      const centerX = 400; // X-coordinate of the center
-      const centerY = 300; // Y-coordinate of the center
-      const radius = 200; // Distance from the center
+      const centerX = 400;
+      const centerY = 300;
+      const radius = 200;
 
       if (count === 1) {
         return [{ x: centerX, y: centerY }];
@@ -67,7 +70,7 @@ const App = ({ nodeCount, setRelations }) => {
 
       const positions = [];
       for (let i = 0; i < count; i++) {
-        const angle = (2 * Math.PI * i) / count; // Divide the circle equally
+        const angle = (2 * Math.PI * i) / count;
         const x = centerX + radius * Math.cos(angle);
         const y = centerY + radius * Math.sin(angle);
         positions.push({ x, y });
@@ -132,8 +135,26 @@ const App = ({ nodeCount, setRelations }) => {
   }, [connections, nodes, setRelations]);
 
   return (
-    <div id="app-container">
-      <div id="node-container">
+    <div id="layout">
+      {/* Sidebar */}
+      <div id="sidebar">
+        <Counter value={nodeCount} onChange={setNodeCount} />
+        <div id="node-info">
+          <h3>Properties:</h3>
+          <p>Reflexive: {relations.reflexive ? "Yes" : "No"}</p>
+          <p>Anti-Reflexive: {relations.antiReflexive ? "Yes" : "No"}</p>
+          <p>Symmetric: {relations.symmetric ? "Yes" : "No"}</p>
+          <p>Anti-Symmetric: {relations.antiSymmetric ? "Yes" : "No"}</p>
+          <p>Transitive: {relations.transitive ? "Yes" : "No"}</p>
+          <h3>Relation:</h3>
+          <p>Equivalence Relation: {relations.equivalent ? "Yes" : "No"}</p>
+          <p>Partial Order Relation: {relations.partial ? "Yes" : "No"}</p>
+          <p>Total Order Relation: {relations.total ? "Yes" : "No"}</p>
+        </div>
+      </div>
+
+      {/* Main Area */}
+      <div id="main-area">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -150,10 +171,10 @@ const App = ({ nodeCount, setRelations }) => {
         >
           <Background />
         </ReactFlow>
-      </div>
-      <div id="connections-info">
-        <h3>Current Connections:</h3>
-        <p>{connections}</p>
+        <div id="connections-info">
+          <h3>Current Connections:</h3>
+          <p>{connections}</p>
+        </div>
       </div>
     </div>
   );
