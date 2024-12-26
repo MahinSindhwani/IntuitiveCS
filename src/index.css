@@ -315,3 +315,54 @@ body {
   background-color: #007bff;
   color: white;
 }
+
+/* Group Node Styling */
+/* Group Node Styling for Functions Page */
+.react-flow__node-group[data-id="A"],
+.react-flow__node-group[data-id="B"] {
+  border: 2px solid #173264 !important;
+  border-radius: 5px !important;
+  background-color: rgba(207, 182, 255, 0.2) !important;
+  padding: 10px !important;
+  box-sizing: border-box;
+  width: 200px;
+  height: 350px;
+}
+
+/* Child Node Styling Scoped to Functions Page */
+.react-flow__node-group[data-id="A"] .react-flow__node-custom,
+.react-flow__node-group[data-id="B"] .react-flow__node-custom {
+  width: 10px; /* Reduce width */
+  height: 10px; /* Reduce height */
+  font-size: 10px; /* Adjust font size for smaller nodes */
+  border: 1px solid #4a90e2;
+  background-color: #ffffff;
+  border-radius: 50%; /* Make it a circle */
+  text-align: center;
+  line-height: 50px; /* Vertically center text */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center; /* Center content horizontally and vertically */
+  justify-content: center;
+}
+
+
+/* Ensure Proper Positioning for Grouped Nodes */
+.react-flow__node-custom[data-parentid="A"],
+.react-flow__node-custom[data-parentid="B"] {
+  position: absolute;
+}
+
+.react-flow__edge-path {
+  stroke: #293a42; /* Match the color in App.jsx */
+  stroke-width: 3; /* Ensure proper stroke width */
+}
+
+.react-flow__edge-path.floating {
+  stroke: #293a42 !important;
+  stroke-width: 3 !important;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: none; /* Disable dashed line */
+}
