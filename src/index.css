@@ -318,16 +318,18 @@ body {
 
 /* Group Node Styling */
 /* Group Node Styling for Functions Page */
+/* Oval Parent Node Styling */
 .react-flow__node-group[data-id="A"],
 .react-flow__node-group[data-id="B"] {
   border: 2px solid #173264 !important;
-  border-radius: 5px !important;
+  border-radius: 50% / 40%; /* Adjust these values for a more pronounced oval shape */
   background-color: rgba(207, 182, 255, 0.2) !important;
   padding: 10px !important;
   box-sizing: border-box;
-  width: 200px;
-  height: 350px;
+  width: 300px; /* Adjust width for oval */
+  height: 150px; /* Adjust height for oval */
 }
+
 
 /* Child Node Styling Scoped to Functions Page */
 .react-flow__node-group[data-id="A"] .react-flow__node-custom,

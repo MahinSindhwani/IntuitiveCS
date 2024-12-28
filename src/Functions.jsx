@@ -1,159 +1,4 @@
-// import React, { useCallback, useState } from "react";
-// import {
-//   ReactFlow,
-//   Background,
-//   applyNodeChanges,
-//   applyEdgeChanges,
-//   addEdge,
-// } from "@xyflow/react";
-
-// import "@xyflow/react/dist/style.css";
-// import FloatingEdge from "./FloatingEdge"; // Use your FloatingEdge component
-// import CustomNode from "./CustomNode"; // Use your CustomNode component
-// import CustomConnectionLine from "./CustomConnectionLine";
-
-// const edgeTypes = {
-//   floating: FloatingEdge,
-// };
-
-// const nodeTypes = {
-//   custom: CustomNode, // Use CustomNode for child nodes
-// };
-
-// const connectionLineStyle = {
-//   stroke: "#293a42",
-//   strokeWidth: 3,
-// };
-
-// const rfStyle = {
-//   backgroundColor: "#F7F9FB",
-// };
-
-// // Initial nodes
-// const initialNodes = [
-//   {
-//     id: "A",
-//     type: "group",
-//     position: { x: 0, y: 0 },
-//     data: { label: "Parent A" },
-//   },
-//   {
-//     id: "A-1",
-//     type: "custom",
-//     data: { label: "Child Node 1-A" },
-//     position: { x: 50, y: 20 },
-//     parentId: "A",
-//     extent: "parent",
-//     draggable: false,
-//   },
-//   {
-//     id: "A-2",
-//     type: "custom",
-//     data: { label: "Child Node 2-A" },
-//     position: { x: 50, y: 120 },
-//     parentId: "A",
-//     extent: "parent",
-//     draggable: false,
-//   },
-//   {
-//     id: "A-3",
-//     type: "custom",
-//     data: { label: "Child Node 3-A" },
-//     position: { x: 50, y: 220 },
-//     parentId: "A",
-//     extent: "parent",
-//     draggable: false,
-//   },
-//   {
-//     id: "B",
-//     type: "group",
-//     position: { x: 350, y: 0 },
-//     data: { label: "Parent B" },
-//   },
-//   {
-//     id: "B-1",
-//     type: "custom",
-//     data: { label: "Child Node 1-B" },
-//     position: { x: 50, y: 20 },
-//     parentId: "B",
-//     extent: "parent",
-//     draggable: false,
-//   },
-//   {
-//     id: "B-2",
-//     type: "custom",
-//     data: { label: "Child Node 2-B" },
-//     position: { x: 50, y: 120 },
-//     parentId: "B",
-//     extent: "parent",
-//     draggable: false,
-//   },
-//   {
-//     id: "B-3",
-//     type: "custom",
-//     data: { label: "Child Node 3-B" },
-//     position: { x: 50, y: 220 },
-//     parentId: "B",
-//     extent: "parent",
-//     draggable: false,
-//   },
-// ];
-
-// const Functions = () => {
-//   const [nodes, setNodes] = useState(initialNodes);
-//   const [edges, setEdges] = useState([]);
-
-//   const onNodesChange = useCallback(
-//     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-//     []
-//   );
-
-//   const onEdgesChange = useCallback(
-//     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-//     []
-//   );
-
-//   const onConnect = useCallback(
-//     (connection) =>
-//       setEdges((eds) =>
-//         addEdge(
-//           {
-//             ...connection,
-//             type: "floating",
-//             animated: true,
-//             style: { stroke: "#293a42", strokeWidth: 3 },
-//           },
-//           eds
-//         )
-//       ),
-//     []
-//   );
-
-//   return (
-//     <div style={{ height: "100vh" }}>
-//       <ReactFlow
-//         nodes={nodes}
-//         edges={edges}
-//         onNodesChange={onNodesChange}
-//         onEdgesChange={onEdgesChange}
-//         onConnect={onConnect}
-//         fitView
-//         edgeTypes={edgeTypes}
-//         nodeTypes={nodeTypes}
-//         style={rfStyle}
-//         attributionPosition="top-right"
-//         connectionLineComponent={CustomConnectionLine}
-//         connectionLineStyle={connectionLineStyle}
-//       >
-//         <Background />
-//       </ReactFlow>
-//     </div>
-//   );
-// };
-
-// export default Functions;
-
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import {
   ReactFlow,
   Background,
@@ -165,6 +10,8 @@ import {
 import FloatingEdge from "./FloatingEdge"; // Ensure consistency with App.jsx
 import CustomNode from "./CustomNode"; // Use the same CustomNode component
 import CustomConnectionLine from "./CustomConnectionLine"; // Use CustomConnectionLine for edge connections
+
+import { analyzeFunctionTypes } from "./FunctionsLogic"; // Import logic for function type analysis
 
 import "./index.css";
 
@@ -202,7 +49,7 @@ const initialNodes = [
   {
     id: "A-1",
     type: "custom",
-    data: { label: "Child Node 1-A" },
+    data: { label: "a" },
     position: { x: 50, y: 20 },
     parentId: "A",
     extent: "parent",
@@ -211,7 +58,7 @@ const initialNodes = [
   {
     id: "A-2",
     type: "custom",
-    data: { label: "Child Node 2-A" },
+    data: { label: "b" },
     position: { x: 50, y: 120 },
     parentId: "A",
     extent: "parent",
@@ -220,7 +67,7 @@ const initialNodes = [
   {
     id: "A-3",
     type: "custom",
-    data: { label: "Child Node 3-A" },
+    data: { label: "c" },
     position: { x: 50, y: 220 },
     parentId: "A",
     extent: "parent",
@@ -236,7 +83,7 @@ const initialNodes = [
   {
     id: "B-1",
     type: "custom",
-    data: { label: "Child Node 1-B" },
+    data: { label: "x" },
     position: { x: 50, y: 20 },
     parentId: "B",
     extent: "parent",
@@ -245,7 +92,7 @@ const initialNodes = [
   {
     id: "B-2",
     type: "custom",
-    data: { label: "Child Node 2-B" },
+    data: { label: "y" },
     position: { x: 50, y: 120 },
     parentId: "B",
     extent: "parent",
@@ -254,7 +101,7 @@ const initialNodes = [
   {
     id: "B-3",
     type: "custom",
-    data: { label: "Child Node 3-B" },
+    data: { label: "z" },
     position: { x: 50, y: 220 },
     parentId: "B",
     extent: "parent",
@@ -265,6 +112,7 @@ const initialNodes = [
 const Functions = () => {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState([]);
+  const [functionType, setFunctionType] = useState("Unknown");
 
   const onNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -292,24 +140,34 @@ const Functions = () => {
     []
   );
 
+  useEffect(() => {
+    setFunctionType(analyzeFunctionTypes(nodes, edges)); // Analyze the function type dynamically
+  }, [nodes, edges]);
+
   return (
-    <div style={{ height: "100vh" }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        fitView
-        edgeTypes={edgeTypes}
-        nodeTypes={nodeTypes}
-        style={rfStyle}
-        connectionLineComponent={CustomConnectionLine} // Ensure CustomConnectionLine is used
-        connectionLineStyle={connectionLineStyle}
-        defaultEdgeOptions={defaultEdgeOptions} // Apply default options for edges
-      >
-        <Background />
-      </ReactFlow>
+    <div id="layout">
+      <div id="sidebar">
+        <h3>Function Type:</h3>
+        <p>{functionType}</p>
+      </div>
+      <div id="main-area">
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          fitView
+          edgeTypes={edgeTypes}
+          nodeTypes={nodeTypes}
+          style={rfStyle}
+          connectionLineComponent={CustomConnectionLine}
+          connectionLineStyle={connectionLineStyle}
+          defaultEdgeOptions={defaultEdgeOptions}
+        >
+          <Background />
+        </ReactFlow>
+      </div>
     </div>
   );
 };
