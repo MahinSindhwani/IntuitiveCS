@@ -9,7 +9,7 @@ import HamburgerMenu from "./HamburgerMenu.jsx";
 
 function Main() {
   return (
-    <Router basename="/IntuitiveCS">
+    <Router basename="/">
       <HamburgerMenu />
       <Routes>
         <Route path="/" element={<Home />} />
