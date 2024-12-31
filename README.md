@@ -1,6 +1,13 @@
-# React + Vite
+IntuitiveCS by Parsa Esmkhani, Mahin Sindhwani, Shajan Alam.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## License
+
+This project is licensed under a [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+For any use beyond this license please contact:
+intuitivecs@gmail.com
+
+## Description of Project
 
 Currently, two official plugins are available:
 
