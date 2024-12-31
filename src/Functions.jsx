@@ -5,6 +5,7 @@ import {
   applyNodeChanges,
   applyEdgeChanges,
   addEdge,
+  Handle,
 } from "@xyflow/react";
 
 import FloatingEdge from "./FloatingEdge"; // Ensure consistency with App.jsx
@@ -14,6 +15,7 @@ import CustomConnectionLine from "./CustomConnectionLine"; // Use CustomConnecti
 import { analyzeFunctionTypes } from "./FunctionsLogic"; // Import logic for function type analysis
 
 import "./index.css";
+// import { Handle } from "react-flow-renderer";
 
 const edgeTypes = {
   floating: FloatingEdge, // Match the App file's edge styling
@@ -44,7 +46,7 @@ const initialNodes = [
     type: "group",
     position: { x: 0, y: 0 },
     data: { label: "Parent A" },
-    style: { width: 200, height: 350 }, // Adjust dimensions as needed
+    style: { width: 200, height: 350 },
   },
   {
     id: "A-1",
@@ -54,6 +56,7 @@ const initialNodes = [
     parentId: "A",
     extent: "parent",
     draggable: false,
+    className: "group-a-node",
   },
   {
     id: "A-2",
@@ -63,6 +66,7 @@ const initialNodes = [
     parentId: "A",
     extent: "parent",
     draggable: false,
+    className: "group-a-node",
   },
   {
     id: "A-3",
@@ -72,6 +76,7 @@ const initialNodes = [
     parentId: "A",
     extent: "parent",
     draggable: false,
+    className: "group-a-node",
   },
   {
     id: "B",
@@ -88,6 +93,7 @@ const initialNodes = [
     parentId: "B",
     extent: "parent",
     draggable: false,
+    className: "group-b-node",
   },
   {
     id: "B-2",
@@ -97,6 +103,7 @@ const initialNodes = [
     parentId: "B",
     extent: "parent",
     draggable: false,
+    className: "group-b-node",
   },
   {
     id: "B-3",
@@ -106,6 +113,7 @@ const initialNodes = [
     parentId: "B",
     extent: "parent",
     draggable: false,
+    className: "group-b-node",
   },
 ];
 

@@ -368,3 +368,13 @@ body {
 .react-flow__edge.animated .react-flow__edge-path {
   stroke-dasharray: none; /* Disable dashed line */
 }
+
+/* Hide target handle for Group A nodes */
+.group-a-node .customHandle.target {
+  display: none !important;
+}
+
+/* Hide source handle for Group B nodes */
+.group-b-node .customHandle.source {
+  display: none !important;
+}
