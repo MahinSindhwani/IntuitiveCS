@@ -2,89 +2,170 @@
 
 @import url('./xy-theme.css');
 
-html,
-body {
+/* Global Styles */
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
   font-family: sans-serif;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
+  flex-direction: column;
 }
 
-#root,
-#app {
+#root, #app {
   width: 100%;
   height: 100%;
 }
 
-/* Layout and sidebar styling */
+/* Layout Styles */
 #layout {
   display: flex;
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
-  position: relative; /* Ensures that fixed elements like the hamburger menu are positioned relative to the layout */
+  position: relative;
 }
 
-/* Sidebar adjustments to prevent overlap with the hamburger menu */
+/* Sidebar Styles (Used in App.jsx and Functions.jsx) */
 #sidebar {
-  width: 300px;
+  width: 250px;
   background: #eee;
-  padding: 20px;
+  padding: 15px;
   box-sizing: border-box;
-  padding-top: 60px; /* Adds space for the hamburger menu */
+  padding-top: 60px;
+  overflow-y: auto;
 }
 
 #node-info {
-  margin-top: 40px;
+  margin-top: 20px;
+  font-size: 0.9rem;
 }
 
+/* Main Area Styles (Shared across components) */
 #main-area {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px; /* Optional: Adds padding to the main area */
+  padding: 10px;
+  margin-left: 0;
 }
 
-/* App Container */
-#app-container {
+/* Home Component Styles */
+#home-container {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  width: 90%;
-  height: 90%;
-  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
-#node-container {
-  flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #fff;
-}
-
-#connections-info {
-  margin-top: 10px;
-  font-size: 1rem;
+#home-links a {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #007bff;
+  text-decoration: none;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  width: 200px;
   text-align: center;
 }
 
-/* Counter Styling */
-.counter {
+#home-links a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Footer Styles (Used in Home.jsx) */
+#footer-container {
+  width: 100%;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #333;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer-links {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #007bff;
+  margin: 0 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-credits {
+  margin: 5px 0;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.footer-copyright {
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+/* Dropdown Styles (Used in Dropdown.jsx) */
+.dropdown-container {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 8px;
 }
 
-#count {
-  width: 50px;
-  text-align: center;
+.dropdown-toggle {
+  background: none;
+  border: none;
   font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
 }
 
-/* Custom Node Styling */
+.dropdown-toggle:hover {
+  color: #007bff;
+}
+
+.dropdown-content {
+  margin-top: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Visualization Styles (Used in FPRpage.jsx, App.jsx, and Functions.jsx) */
+.visualization {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #cccccc;
+  border-radius: 8px;
+}
+
+/* React Flow Node and Edge Styles */
 .customNode {
   background: transparent;
   border: none;
@@ -102,6 +183,190 @@ body {
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
+}
+
+.react-flow__edge-path {
+  stroke: #293a42;
+  stroke-width: 3;
+}
+
+.react-flow__edge-path:hover {
+  stroke: white;
+}
+
+/* Hamburger Menu Styles (Used in HamburgerMenu.jsx) */
+.hamburger-icon {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s;
+  z-index: 1000;
+}
+
+.menu-overlay.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.sliding-menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease;
+  z-index: 1001;
+  padding-top: 60px;
+}
+
+.sliding-menu.open {
+  right: 0;
+}
+
+.sliding-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sliding-menu li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.sliding-menu li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  display: block;
+}
+
+.sliding-menu li a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 250px;
+    padding: 15px;
+  }
+
+  .sliding-menu {
+    width: 200px;
+  }
+
+  .sliding-menu li a {
+    font-size: 16px;
+  }
+}
+
+.button-edge__label {
+  position: absolute;
+  pointer-events: all;
+  transform-origin: center;
+}
+
+.button-edge__button {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #f7f9fb;
+  color: #333;
+  background-color: #f3f3f4;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.button-edge__button:hover {
+  background-color: #64b5f6;
+  color: #ffffff;
+}
+
+/* Custom Group Node Styling for Functions.jsx*/
+.react-flow__node-group[data-id="A"],
+.react-flow__node-group[data-id="B"] {
+  border: 2px solid #173264 !important;
+  border-radius: 50% / 40%;
+  background-color: rgba(207, 182, 255, 0.2) !important;
+  padding: 10px !important;
+  box-sizing: border-box;
+  width: 300px;
+  height: 150px;
+}
+
+.react-flow__node-group[data-id="A"] .react-flow__node-custom,
+.react-flow__node-group[data-id="B"] .react-flow__node-custom {
+  width: 10px;
+  height: 10px;
+  font-size: 10px;
+  border: 1px solid #4a90e2;
+  background-color: #ffffff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-flow__node-custom[data-parentid="A"],
+.react-flow__node-custom[data-parentid="B"] {
+  position: absolute;
+}
+
+.react-flow__edge-path {
+  stroke: #293a42;
+  stroke-width: 3;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: none;
+}
+
+#mobile-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 18px;
+  z-index: 9999;
+}
+
+.section {
+  margin: 20px 0;
+}
+
+.dropdown-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
 }
 
 .customNodeBody {
@@ -154,222 +419,6 @@ body {
   transform: translateY(-50%);
 }
 
-.customNodeBody input {
-  width: 100%;
-  font-size: 1rem;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-}
-
-.react-flow__edge-path:hover {
-  stroke: white; /* Highlight teal on hover */
-}
-
-/* Hamburger Menu Styles */
-.hamburger-icon {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 1001; /* Ensures it's above other elements */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hamburger-icon img,
-.hamburger-icon svg {
-  width: 100%;
-  height: 100%;
-  color: #333; /* Adjust color if using SVG icons like react-icons */
-}
-
-/* Overlay for the Sliding Menu */
-.menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.3s;
-  z-index: 1000;
-}
-
-.menu-overlay.open {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Sliding Menu */
-.sliding-menu {
-  position: fixed;
-  top: 0;
-  right: -250px; /* Hidden by default */
-  width: 250px;
-  height: 100%;
-  background-color: #fff;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-  transition: right 0.3s ease;
-  z-index: 1001;
-  padding-top: 60px; /* Space for the hamburger icon */
-}
-
-.sliding-menu.open {
-  right: 0;
-}
-
-.sliding-menu ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sliding-menu li {
-  padding: 15px 20px;
-  border-bottom: 1px solid #ccc;
-}
-
-.sliding-menu li a {
-  text-decoration: none;
-  color: #333;
-  font-size: 18px;
-  display: block;
-}
-
-.sliding-menu li a:hover {
-  background-color: #f0f0f0;
-}
-
-/* Ensure that the main content is below the hamburger menu */
-#main-area {
-  margin-left: 0; /* Reset if previously adjusted */
-}
-
-/* Responsive Adjustments (Optional) */
-@media (max-width: 768px) {
-  #sidebar {
-    width: 250px;
-    padding: 15px;
-  }
-
-  .sliding-menu {
-    width: 200px;
-  }
-
-  .sliding-menu li a {
-    font-size: 16px;
-  }
-}
-
-
-.button-edge__label {
-  position: absolute;
-  pointer-events: all;
-  transform-origin: center;
-}
-
-.button-edge__button {
-  width: 25px;
-  height: 25px;
-  border: 2px solid #f7f9fb;
-  color: #333;
-  background-color: #f3f3f4;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 14px;
-}
-
-.button-edge__button:hover {
-  background-color: #64b5f6; /* Highlight color on hover */
-  color: #ffffff;
-}
-
-
-/* Example styles for Home.jsx */
-#home-container {
-  text-align: center;
-  margin-top: 50px;
-}
-
-#home-links a {
-  display: block;
-  margin: 15px auto;
-  padding: 10px 20px;
-  font-size: 18px;
-  color: #007bff;
-  text-decoration: none;
-  border: 2px solid #007bff;
-  border-radius: 5px;
-  width: 200px;
-  text-align: center;
-}
-
-#home-links a:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-/* Group Node Styling */
-/* Group Node Styling for Functions Page */
-/* Oval Parent Node Styling */
-.react-flow__node-group[data-id="A"],
-.react-flow__node-group[data-id="B"] {
-  border: 2px solid #173264 !important;
-  border-radius: 50% / 40%; /* Adjust these values for a more pronounced oval shape */
-  background-color: rgba(207, 182, 255, 0.2) !important;
-  padding: 10px !important;
-  box-sizing: border-box;
-  width: 300px; /* Adjust width for oval */
-  height: 150px; /* Adjust height for oval */
-}
-
-
-/* Child Node Styling Scoped to Functions Page */
-.react-flow__node-group[data-id="A"] .react-flow__node-custom,
-.react-flow__node-group[data-id="B"] .react-flow__node-custom {
-  width: 10px; /* Reduce width */
-  height: 10px; /* Reduce height */
-  font-size: 10px; /* Adjust font size for smaller nodes */
-  border: 1px solid #4a90e2;
-  background-color: #ffffff;
-  border-radius: 50%; /* Make it a circle */
-  text-align: center;
-  line-height: 50px; /* Vertically center text */
-  box-sizing: border-box;
-  display: flex;
-  align-items: center; /* Center content horizontally and vertically */
-  justify-content: center;
-}
-
-
-/* Ensure Proper Positioning for Grouped Nodes */
-.react-flow__node-custom[data-parentid="A"],
-.react-flow__node-custom[data-parentid="B"] {
-  position: absolute;
-}
-
-.react-flow__edge-path {
-  stroke: #293a42; /* Match the color in App.jsx */
-  stroke-width: 3; /* Ensure proper stroke width */
-}
-
-.react-flow__edge-path.floating {
-  stroke: #293a42 !important;
-  stroke-width: 3 !important;
-}
-
-.react-flow__edge.animated .react-flow__edge-path {
-  stroke-dasharray: none; /* Disable dashed line */
-}
-
-/* Hide target handle for Group A nodes */
 .group-a-node .customHandle.target {
   display: none !important;
 }
@@ -379,19 +428,20 @@ body {
   display: none !important;
 }
 
-/* Mobile Message Styling */
-#mobile-message {
-  position: fixed;
-  top: 0;
-  left: 0;
+.customNodeBody input {
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  display: none; /* Hidden by default */
-  justify-content: center;
-  align-items: center;
+  font-size: 1rem;
   text-align: center;
-  font-size: 18px;
-  z-index: 9999;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.group-a-node .customHandle.target {
+  display: none !important;
+}
+
+/* Hide source handle for Group B nodes */
+.group-b-node .customHandle.source {
+  display: none !important;
 }

@@ -55,13 +55,8 @@ const HamburgerMenu = () => {
             </Link>
           </li>
           <li>
-            <Link to="/app" onClick={toggleMenu}>
-              App Page
-            </Link>
-          </li>
-          <li>
-            <Link to="/functions" onClick={toggleMenu}>
-              Functions Page
+            <Link to="/FPRpage" onClick={toggleMenu}>
+              Functions, Predicates and Realtions
             </Link>
           </li>
         </ul>

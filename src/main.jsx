@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import Home from "./Home.jsx";
 import Functions from "./Functions.jsx";
 import HamburgerMenu from "./HamburgerMenu.jsx";
+import FPR from "./FPRpage.jsx";
 
 function Main() {
   return (
@@ -13,8 +14,9 @@ function Main() {
       <HamburgerMenu />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/app" element={<App />} />
-        <Route path="/functions" element={<Functions />} />
+        <Route path="/FPRpage" element={<FPR />} />
+        {/* <Route path="/app" element={<App />} />
+        <Route path="/functions" element={<Functions />} /> */}
       </Routes>
     </Router>
   );

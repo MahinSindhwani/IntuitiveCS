@@ -166,6 +166,9 @@ const Functions = () => {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           fitView
+          fitViewOptions={{
+            padding: 0.5, // Adjust padding to control zoom level
+          }}
           edgeTypes={edgeTypes}
           nodeTypes={nodeTypes}
           style={rfStyle}

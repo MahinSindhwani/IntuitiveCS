@@ -62,7 +62,7 @@ const App = () => {
     const calculatePositions = (count) => {
       const centerX = 400;
       const centerY = 300;
-      const radius = 200;
+      const radius = 250;
 
       if (count === 1) {
         return [{ x: centerX, y: centerY }];
@@ -162,6 +162,9 @@ const App = () => {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           fitView
+          fitViewOptions={{
+            padding: 0.3, // Adjust padding to control zoom level
+          }}
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
           style={{ backgroundColor: "#F7F9FB" }}
